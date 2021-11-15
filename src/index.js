@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 import dotenv from 'dotenv'
 import userRoute from './api/user/user.route.js'
 import passport from 'passport'
-dotenv.config()
+dotenv.config({path:'../.env'})
 const port = process.env.PORT || 5000
 const dbURI = process.env.DB_URI
 app.use(passport.initialize());
