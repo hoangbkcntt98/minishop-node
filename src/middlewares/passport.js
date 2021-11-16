@@ -66,7 +66,7 @@ passport.use(new FacebookStrategy(
       var user = await User.findOne({ facebookId: profile.id })
       if (user) {
         console.log("update  user facebook");
-        user = await User.findOneAndUpdate({ facebookId: profile.id }, { email: email, name: displayName, avatar: profile.photos[0].value })
+        user = await User.findOneAndUpdate({ facebookId: profile.id }, { email: email, name: displayName, avatar: profile.photos[0].value },{new:true})
         return done(null, user)
       } else {
         user = await User.findOne({ email: email })
@@ -75,7 +75,7 @@ passport.use(new FacebookStrategy(
           user = await User.create({ facebookId: profile.id, email: email, name: displayName, password: "", avatar: profile.photos[0].value })
         } else {
           console.log('update facebook user have email')
-          user = await User.findOneAndUpdate({ facebookId: profile.id }, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value })
+          user = await User.findOneAndUpdate({ facebookId: profile.id }, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value },{new:true})
           return done(null, user)
         }
       }
