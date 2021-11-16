@@ -78,5 +78,18 @@ const userController = {
             console.log(error)
         }
     }
+    ,
+    deleteAll : async(req,res) =>{
+        try{
+            await userService.deleteAll();
+            return res.json({
+                content:"delete okd"
+            })
+        }catch(err){
+            return res.json({
+                error:err
+            })
+        }
+    }
 }
 export default userController;

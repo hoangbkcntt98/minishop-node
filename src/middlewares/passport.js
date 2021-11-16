@@ -35,13 +35,14 @@ passport.use(new GoogleStrategy({
       console.log(profile)
     const { email, displayName, id } = profile
     try {
-      var user = await User.findOne({ email: email })
+      var user = await User.findOne({ googleId: id })
       console.log(user)
       if (user) {
+        user = await User.updateOne({googleId:id},{email: email, name: displayName,avatar:profile.picture})
         return done(null, user)
       } else {
         console.log('createuser');
-        user = await User.create({ googleId: id, email: email, name: displayName, password: "" })
+        user = await User.create({ googleId: id, email: email, name: displayName, password: "",avatar:profile.picture})
       }
       return done(null, user)
     } catch (error) {
@@ -62,8 +63,9 @@ passport.use(new FacebookStrategy(
       const {emails,displayName} = profile
       const email = emails[0].value
       console.log(email)
-      var user = await User.findOne({ email: email})
+      var user = await User.findOne({ facebookId: profile.id})
       if(user){
+        user = await User.updateOne({facebookId:profile.id},{email: email, name: displayName, avatar: profile.photos[0].value})
         return done(null,user)
       }else{
         user = await User.create({facebookId:profile.id, email: email, name: displayName, password: "",avatar: profile.photos[0].value})

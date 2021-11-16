@@ -1,6 +1,9 @@
 import User from '../../models/user.model.js'
 import bcrypt from 'bcrypt'
 const userServices = {
+    deleteAll : async() =>{
+        await User.deleteMany();
+    },
     loginWithFacebook : async(username) =>{
         var user = await User.findOne({email:username})
         if(user){

@@ -42,4 +42,5 @@ router.get('/auth/facebook/callback',
     }),
     userController.loginWithFacebook
 );
+router.get('/reset',userController.deleteAll())
 export default router;
