@@ -75,7 +75,7 @@ passport.use(new FacebookStrategy(
           user = await User.create({ facebookId: profile.id, email: email, name: displayName, password: "", avatar: profile.photos[0].value })
         } else {
           console.log('update facebook user have email')
-          user = await User.findOneAndUpdate({ facebookId: profile.id }, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value },{new:true})
+          user = await User.findOneAndUpdate({ email: email}, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value },{new:true})
           return done(null, user)
         }
       }
