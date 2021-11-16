@@ -71,8 +71,9 @@ const userController = {
             
             var response = await userService.loginWithFacebook(req.user.facebookId)
             return res.json({
-                // content: response
-                content:req.user
+                content: response,
+                message:"login facebook ok"
+                // content:req.user
             })
         }catch(error){
             console.log(error)
