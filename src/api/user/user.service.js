@@ -4,8 +4,8 @@ const userServices = {
     deleteAll : async() =>{
         await User.deleteMany();
     },
-    loginWithFacebook : async(username) =>{
-        var user = await User.findOne({email:username})
+    loginWithFacebook : async(id) =>{
+        var user = await User.findOne({facebookId:id})
         if(user){
             return {
                 user:await user.toAuthJSON(),
