@@ -72,7 +72,7 @@ const userController = {
             // var response = await userService.loginWithFacebook(req.user.email?req.user.email:req.user.phone)
             return res.json({
                 // content: response
-                content:req.user
+                content:'hello'
             })
         }catch(error){
             console.log(error)

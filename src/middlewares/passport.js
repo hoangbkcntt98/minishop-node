@@ -53,11 +53,19 @@ passport.use(new FacebookStrategy(
   {
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: FACEBOOK_CALLBACK_URL
+    callbackURL: FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'displayName', 'photos', 'email']
   },
   async (accessToken, freshToken, profile, done) => {
     try{
       console.log(profile)
+      const {email,displayName} = profile
+      var user = await User.findOne({ email: email})
+      if(user){
+        return done(null,user)
+      }else{
+        user = await User.create({ email: email, name: displayName, password: "" })
+      }
     }catch(err){
       return done(err)
     }
