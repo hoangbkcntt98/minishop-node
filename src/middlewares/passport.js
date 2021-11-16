@@ -62,12 +62,12 @@ passport.use(new FacebookStrategy(
       const {emails,displayName} = profile
       const email = emails[0].value
       console.log(email)
-      var user = await User.findOne({ email: 'test@gmail.com'})
-      // if(user){
-      //   return done(null,user)
-      // }else{
-      //   user = await User.create({ email: email?email:'test@gmail.com', name: displayName, password: "" })
-      // }
+      var user = await User.findOne({ email: email})
+      if(user){
+        return done(null,user)
+      }else{
+        user = await User.create({ email: email?email:'test@gmail.com', name: displayName, password: "" })
+      }
       return done(null,user)
     }catch(err){
       return done(err)
