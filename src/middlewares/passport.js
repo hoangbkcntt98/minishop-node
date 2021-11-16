@@ -32,7 +32,7 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
   async (request, accessToken, refreshToken, profile, done) => {
-    //   console.log(profile)
+      console.log(profile)
     const { email, displayName, id } = profile
     try {
       var user = await User.findOne({ email: email })
@@ -66,7 +66,7 @@ passport.use(new FacebookStrategy(
       if(user){
         return done(null,user)
       }else{
-        user = await User.create({ email: email?email:'test@gmail.com', name: displayName, password: "" })
+        user = await User.create({facebookId:profile.id, email: email, name: displayName, password: "",avatar: profile.photos[0].value})
       }
       return done(null,user)
     }catch(err){

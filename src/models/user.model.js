@@ -5,6 +5,9 @@ import { SECRET_CODE } from '../config/config.js'
 const Schema = mongoose.Schema
 const UserSchema = new Schema(
     {
+        facebookId:{
+            type:String
+        },
         googleId:{
             type:String
         },
