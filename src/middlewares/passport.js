@@ -32,18 +32,18 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
   async (request, accessToken, refreshToken, profile, done) => {
-      console.log(profile)
+    console.log(profile)
     const { email, displayName, id } = profile
     try {
       var user = await User.findOne({ googleId: id })
       console.log(user)
       if (user) {
-        user = await User.findOneAndUpdate({googleId:id},{email: email, name: displayName,avatar:profile.picture},{new:true})
-        console.log('update google user',user.email)
+        user = await User.findOneAndUpdate({ googleId: id }, { email: email, name: displayName, avatar: profile.picture }, { new: true })
+        console.log('update google user', user.email)
         return done(null, user)
       } else {
-        user = await User.create({ googleId: id, email: email, name: displayName, password: "",avatar:profile.picture})
-        console.log('create gg user',user.email)
+        user = await User.create({ googleId: id, email: email, name: displayName, password: "", avatar: profile.picture })
+        console.log('create gg user', user.email)
       }
       return done(null, user)
     } catch (error) {
@@ -59,24 +59,28 @@ passport.use(new FacebookStrategy(
     profileFields: ['id', 'displayName', 'photos', 'emails']
   },
   async (accessToken, freshToken, profile, done) => {
-    try{
+    try {
       console.log(profile)
-      const {emails,displayName} = profile
+      const { emails, displayName } = profile
       const email = emails[0].value
-      var user = await User.findOne({ facebookId: profile.id})
-      if(user){
-        user = await User.findOneAndUpdate({facebookId:profile.id},{email: email, name: displayName, avatar: profile.photos[0].value})
-        return done(null,user)
-      }else{
-        user = await User.findOne({email:email})
-        if(!user) {
-          user = await User.create({facebookId:profile.id, email: email, name: displayName, password: "",avatar: profile.photos[0].value})
-        }else{
-          done(null,false)
+      var user = await User.findOne({ facebookId: profile.id })
+      if (user) {
+        console.log("update  user facebook");
+        user = await User.findOneAndUpdate({ facebookId: profile.id }, { email: email, name: displayName, avatar: profile.photos[0].value })
+        return done(null, user)
+      } else {
+        user = await User.findOne({ email: email })
+        if (!user) {
+          console.log("create user facebook")
+          user = await User.create({ facebookId: profile.id, email: email, name: displayName, password: "", avatar: profile.photos[0].value })
+        } else {
+          console.log('update facebook user have email')
+          user = await User.findOneAndUpdate({ facebookId: profile.id }, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value })
+          return done(null, user)
         }
       }
-      return done(null,user)
-    }catch(err){
+      return done(null, user)
+    } catch (err) {
       return done(err)
     }
   }
