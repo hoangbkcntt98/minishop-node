@@ -2,7 +2,7 @@
   "name": "minishop-backend-node",
   "version": "0.1.0",
   "engines": {
-    "node": "16.x"
+    "node": "17.x"
   },
   "private": true,
   "dependencies": {
@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.12",
+    "nock": "^13.2.1",
     "passport": "^0.5.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "build": "react-scripts build",
+    "build": "react-scripts build ",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
