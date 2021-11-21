@@ -1,0 +1,1 @@
+global.API_URL= "https://pos.pages.fm/api/v1/shops/2254195/"

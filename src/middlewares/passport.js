@@ -42,7 +42,7 @@ passport.use(new GoogleStrategy({
         console.log('update google user', user.email)
         return done(null, user)
       } else {
-        user = await User.create({ googleId: id, email: email, name: displayName, password: "", avatar: profile.picture })
+        user = await User.create({ googleId: id, email: email, name: displayName, avatar: profile.picture })
         console.log('create gg user', user.email)
       }
       return done(null, user)
@@ -72,7 +72,7 @@ passport.use(new FacebookStrategy(
         user = await User.findOne({ email: email })
         if (!user) {
           console.log("create user facebook")
-          user = await User.create({ facebookId: profile.id, email: email, name: displayName, password: "", avatar: profile.photos[0].value })
+          user = await User.create({ facebookId: profile.id, email: email, name: displayName, avatar: profile.photos[0].value })
         } else {
           console.log('update facebook user have email')
           user = await User.findOneAndUpdate({ email: email}, { facebookId: profile.id, name: displayName, avatar: profile.photos[0].value },{new:true})
