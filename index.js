@@ -18,7 +18,7 @@ app.listen(port, () => {
     console.log(`listening on port ${port}`)
   })
 app.use('/user',userRoute)
-app.use('/product',productRoutes)
+app.use('/products',productRoutes)
 app.use("*", (req,res) => res.status(404).json({error:"not found"}))
 
               

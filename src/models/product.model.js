@@ -3,6 +3,9 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const productSchema = new Schema(
     {
+        categories : [String],
+        colors :[String],
+        sizes:[String],
         custom_id: {
             type: String,
             unique: true
@@ -32,6 +35,8 @@ const productSchema = new Schema(
                         value: String
                     }
                 ],
+                color:String,
+                size:String,
                 actual_remain_quantity:Number,
                 defect_quantity:Number,
                 remain_quantity:Number,
