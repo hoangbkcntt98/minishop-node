@@ -6,6 +6,8 @@ const productSchema = new Schema(
         categories : [String],
         colors :[String],
         sizes:[String],
+        colors_type:[String],
+        sizes_type:[String],
         custom_id: {
             type: String,
             unique: true
@@ -26,6 +28,8 @@ const productSchema = new Schema(
         ],
         variations: [
             {
+                color_type:String,
+                size_type:String,
                 custom_id:{
                     type:String
                 },

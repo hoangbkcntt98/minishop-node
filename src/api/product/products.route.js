@@ -7,4 +7,5 @@ router.get('/sync',productController.sync)
 router.get('/reset',productController.reset)
 router.get('/find/:id',productController.get)
 router.get('/categories',productController.getCategories)
+router.get('/attributes',productController.getAttributes)
 export default router;

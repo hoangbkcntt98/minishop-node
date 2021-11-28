@@ -1,5 +1,17 @@
 import productServices from "./products.service.js";
 const productController = {
+    getAttributes: async(req,res) =>{
+        try{
+            let attrs = await productServices.getAtttributes(req.query)
+            return res.json({
+                content:attrs
+            })
+        }catch(err){
+            return res.json({
+                error:err
+            })
+        }
+    },
     getCategories : async(req,res) =>{
         try{
             let categories = await productServices.getCategories()
