@@ -72,23 +72,23 @@ const onlyAlphabet = (str) => {
 const formatCategory = (item) => {
     let indexs = [
         {
-            display: "ÁO CHOÀNG",
+            display: "Áo Choàng",
             code: "AC",
         },
         {
-            display: "ÁO KHOÁC",
+            display: "Áo Khoác",
             code: "AK",
         },
         {
-            display: "QUẦN",
+            display: "Quần",
             code: "AK",
         },
         {
-            display: "VÁY",
+            display: "Váy",
             code: "VAY",
         },
         {
-            display: "SET",
+            display: "Set",
             code: "SB",
         },
         {
@@ -240,57 +240,57 @@ const productServices = {
             // add categories
             let indexs = [
                 {
-                    display:"KHÁC",
+                    display:"Khác...",
                     code:"A",
                     subType:1
                 },
                 {
-                    display: "ÁO DÀI",
+                    display: "Áo dài",
                     code: "AD",
                     subType:1
                 },
                 {
-                    display: "ÁO CHOÀNG",
+                    display: "Áo choàng",
                     code: "AC",
                     subType:1
                 },
                 {
-                    display: "ÁO KHOÁC",
+                    display: "Áo khoác",
                     code: "AK",
                     subType:1
                 },
                 {
-                    display: "KHÁC",
+                    display: "Khác...",
                     code: "Q",
                     subType:2
                 },
                 {
-                    display: "QUẦN DÀI",
+                    display: "Quần dài",
                     code: "QD",
                     subType:2
                 },
                 {
-                    display: "QUẦN NGẮN",
+                    display: "Quần ngắn",
                     code: "QN",
                     subType:2
                 },
                 {
-                    display: "VÁY",
+                    display: "Váy",
                     code: "V",
                     subType:3
                 },
                 {
-                    display: "CHÂN VÁY",
+                    display: "Chân váy",
                     code: "CV",
                     subType:3
                 },
                 {
-                    display: "SET",
+                    display: "Set",
                     code: "S",
                     subType:4
                 },
                 {
-                    display: "KHÁC",
+                    display: "Khác",
                     code: "OTHER",
                     subType:5
                 },
