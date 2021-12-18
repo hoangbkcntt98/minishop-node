@@ -39,13 +39,24 @@ const userServices = {
         const saltRounds = 10;
         const {email,password,phone,name} = data
         const passwordHashed = await bcrypt.hash(password,saltRounds)
-        const user = new User({
-            email:email,
-            password:passwordHashed,
-            phone:phone,
-            name:name
-        })
-        await user.save()
+        try{
+            let user = new User({
+                email:email,
+                password:passwordHashed,
+                phone:phone,
+                name:name
+            })
+
+            await user.save()
+            user =  await User.findOne({email:email})
+            await user.generateJWT()
+            var userInfo = await user.toAuthJSON();
+            // console.log(token)
+            return userInfo
+        }catch(err){
+            console.log(err)
+            return err
+        }
     },
     login : async(data) =>{
         try{

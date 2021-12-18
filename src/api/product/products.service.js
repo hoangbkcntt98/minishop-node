@@ -98,7 +98,7 @@ const formatCategory = (item) => {
     ]
 
     for (let index of indexs) {
-        console.log(index.display)
+        //console.log(index.display)
         if (item.name.toUpperCase().includes(index.display)) {
             return index.code
         }
@@ -130,8 +130,8 @@ const productServices = {
 
     },
     get: async (id) => {
-        console.log(id)
-        console.log(await Product.find({ custom_id: { $regex: id, $options: "i" } }))
+        // console.log(id)
+        // console.log(await Product.find({ custom_id: { $regex: id, $options: "i" } }))
         return {
             product: await Product.find({ custom_id: { $regex: id, $options: "i" } }).limit(10)
         }
@@ -140,12 +140,12 @@ const productServices = {
         await Product.deleteMany();
     },
     getAtttributes: async (params) =>{
-        console.log('param',params)
+        // console.log('param',params)
         let res = await Attribute.find({attribute_type:params.type})
         return res
     },
     all: async (params) => {
-        console.log('param', params)
+        // console.log('param', params)
 
         var totalPages = await Product.countDocuments()
 
@@ -154,14 +154,14 @@ const productServices = {
             console.log('has param', params)
             totalPages = Math.round(totalPages / params.page_size)
             console.log('totalPage', totalPages)
-            console.log('items skip', params.page * params.page_size)
+            //console.log('items skip', params.page * params.page_size)
             products = await Product.find({})
                 .skip(Number(params.page * params.page_size))
                 .limit(Number(params.page_size))
-            // console.log('pd size',products.length)
+            // //console.log('pd size',products.length)
 
         } else {
-            console.log('none param')
+            //console.log('none param')
             products = await Product.find({});
         }
         return {
@@ -224,6 +224,8 @@ const productServices = {
                 item.colors_type = temp
 
                 item.sizes_type = getUnique(sizes_type)
+                let total_quantity = 0;
+                let remain_quantity = 0;
                 for(let variation of item.variations){
                     let v_color = variation.fields.find(vari => vari.name =="Màu")
                     let v_size = variation.fields.find(vari => vari.name =="Size")
@@ -231,10 +233,17 @@ const productServices = {
                     variation.size = v_size?v_size.value:"Free"
                     variation.color_type = getColor(variation.color)
                     variation.size_type = getSize(variation.size)
+                    total_quantity += variation.total_quantity
+                    remain_quantity += variation.remain_quantity
                 }
+                item.remain_quantity = remain_quantity
+                item.total_quantity = total_quantity
+                //console.log(item.total_quantity,item.remain_quantity);
                 return item;
             })
-            // console.log(products)
+            // insert total quantity and remain_quantity
+
+            //console.log(products)
             await Product.insertMany(products)
             temp = Array.from(temp)
             // add categories
@@ -306,7 +315,7 @@ const productServices = {
 
                 }
             })
-            // console.log(categories);
+            // //console.log(categories);
             // format color and size value
             
             // add colors to attribute collection 
@@ -338,14 +347,14 @@ const productServices = {
                     sub_type:-1
                 }
             })
-            console.log(colors)
-            console.log(sizes)
+            // //console.log(colors)
+            // //console.log(sizes)
             await Attribute.insertMany(categories)
             await Attribute.insertMany(colors)
             await Attribute.insertMany(sizes)
            
         } catch (err) {
-            console.log(err)
+            //console.log(err)
         }
         return {
             products: products,

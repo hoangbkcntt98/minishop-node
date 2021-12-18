@@ -3,7 +3,7 @@ import userController from "./user.controller.js"
 import passport from 'passport';
 import '../../middlewares/passport.js'
 const router = express.Router();
-router.get("/", userController.all)
+router.get("/", passport.authenticate('jwt',{session:false}),userController.all)
 router.delete("/:id", userController.delete)
 router.post("/login", userController.login);
 router.post("/signup", userController.signup);
@@ -13,6 +13,7 @@ router.get("/error", (req, res) => {
         message: "errors"
     })
 })
+router.get('/auth/google/success',userController.googleAuthSuccess);
 router.get('/auth/google',
     passport.authenticate('google',
         {
@@ -21,7 +22,6 @@ router.get('/auth/google',
     ));
 router.get('/auth/google/callback',
     passport.authenticate('google', {
-        // successRedirect: '/user/google_success',
         failureRedirect: '/error',
         successFlash: true,
         session: false

@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const productSchema = new Schema(
     {
+        total_quantity:Number,
+        remain_quantity:Number,
         categories : [String],
         colors :[String],
         sizes:[String],
@@ -26,6 +28,7 @@ const productSchema = new Schema(
                 ]
             }
         ],
+       
         variations: [
             {
                 color_type:String,
